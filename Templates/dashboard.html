@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Agriculture Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 Smart Agriculture Dashboard</h1>
+        <div class="sensor-box">
+            <h2>Sensor Values:</h2>
+            <ul>
+                <li><strong>Nitrogen:</strong> {{ sensor.Nitrogen | default(0) }}</li>
+                <li><strong>Phosphorus:</strong> {{ sensor.Phosphorus | default(0) }}</li>
+                <li><strong>Potassium:</strong> {{ sensor.Potassium | default(0) }}</li>
+                <li><strong>Temperature:</strong> {{ sensor.Temperature | default(0) }}°C</li>
+                <li><strong>Humidity:</strong> {{ sensor.Humidity | default(0) }}%</li>
+                <li><strong>pH:</strong> {{ sensor.PH | default(0) }}</li>
+            </ul>
+        </div>
+        <div class="prediction">
+            <h2>✅ Top 5 Recommended Crops:</h2>
+            {% if top_crops and top_crops|length > 0 %}
+                <ol>
+                {% for crop in top_crops %}
+                    <li>
+                        <span class="crop">{{ crop.crop | default('Unknown') }}</span> 
+                        ({{ crop.probability | default(0) | float }}%)
+                    </li>
+                {% endfor %}
+                </ol>
+            {% else %}
+                <p>No crop predictions available.</p>
+            {% endif %}
+        </div>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

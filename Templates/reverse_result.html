@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Reverse Prediction Result</title></head>
+<body>
+    <h2>Ideal Conditions for {{ crop }}:</h2>
+    <ul>
+        {% for key, value in features.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/reverse">Try Another Crop</a>
+</body>
+</html>
